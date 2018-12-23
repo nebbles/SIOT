@@ -34,11 +34,17 @@ if __name__ == "__main__":
     ds_time = time.strftime('%Y-%m-%d %H:%M:%S',
                             time.gmtime(int(data_time)))  # Format time to ISO
 
-    ds_temp = data['currently']['apparentTemperature']  # Extract temperature
-    ds_precip = data['currently']['precipProbability']  # Extract precipitation
+    # Extract key values from weather data
+    temp = data['currently']['apparentTemperature']
+    precip = data['currently']['precipProbability']
+    precip_intensity = data['currently']['precipIntensity']
+    hum = data['currently']['humidity']
+    pressure = data['currently']['pressure']
+    storm_dist = data['currently']['nearestStormDistance']
 
     # Compile data into new spreadsheet row
-    row = [cur_time, ds_time, ds_temp, ds_precip]
+    row = [cur_time, ds_time, temp, precip,
+           precip_intensity, hum, pressure, storm_dist]
     # row = [cur_time,cur_time,0,0] # FOR DEBUGGING PURPOSES
 
     # Appending row to a CSV (as backup to Google Sheet)
