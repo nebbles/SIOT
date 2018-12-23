@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
+import os
+import sys
 
 
 def add_to_sheet(sheet_name, row):
@@ -9,7 +11,7 @@ def add_to_sheet(sheet_name, row):
              'https://www.googleapis.com/auth/drive']
 
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        'data_collection/google_credentials.json', scope)
+        os.path.join(sys.path[0], "google_credentials.json"), scope)
 
     gc = gspread.authorize(credentials)
     doc = gc.open_by_key("1LZsKVQDmauzADwlaHXeJy4nndVv-vmaXoD8lfbPoqQo")
