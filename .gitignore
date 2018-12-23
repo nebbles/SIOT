@@ -1,6 +1,7 @@
 # Project-specific
 */credentials.json
 */google_credentials.json
+.vscode
 
 # Logs
 logs
