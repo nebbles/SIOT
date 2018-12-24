@@ -8,29 +8,29 @@ import gsheet
 import sys
 import os
 import csv
+import utils
 
-
-def call_api(url):
-    resp = get(url)
-    if resp.status_code != codes['ok']:
-        raise RuntimeError(
-            "Response returned error {} for URL: {}".format(resp.status_code, url))
-    else:
-        return json.loads(resp.text)
+# def call_api(url):
+#     resp = get(url)
+#     if resp.status_code != codes['ok']:
+#         raise RuntimeError(
+#             "Response returned error {} for URL: {}".format(resp.status_code, url))
+#     else:
+#         return json.loads(resp.text)
 
 
 def get_quote(key, symbol):
     quote = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey={apikey}".format(
         symbol=symbol, apikey=key)
 
-    return call_api(quote)
+    return utils.call_api(quote)
 
 
 def get_currency(key, from_currency, to_currency):
     url = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={fc}&to_currency={tc}&apikey={apikey}".format(
         fc=from_currency, tc=to_currency, apikey=key)
 
-    return call_api(url)
+    return utils.call_api(url)
 
 
 if __name__ == "__main__":
