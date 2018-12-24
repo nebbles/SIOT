@@ -6,10 +6,8 @@ import json
 def call_api(url):
     resp = get(url)
     if resp.status_code != codes['ok']:
-        send_email("There was an error fetching from an API.\nResponse code: {}\nURL: {}".format(
-            resp.status_code, url))
         raise RuntimeError(
-            "Response returned error {} for URL: {}".format(resp.status_code, url))
+            "API Call Response returned error {} for URL: {}".format(resp.status_code, url))
     else:
         return json.loads(resp.text)
 
