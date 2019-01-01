@@ -5,7 +5,8 @@ import os
 import sys
 
 
-def add_to_sheet(sheet_name, row):
+def get_document():
+    """Wrapper for authenticating and returning a document object"""
 
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
@@ -14,8 +15,18 @@ def add_to_sheet(sheet_name, row):
         os.path.join(sys.path[0], "google_credentials.json"), scope)
 
     gc = gspread.authorize(credentials)
-    doc = gc.open_by_key("1LZsKVQDmauzADwlaHXeJy4nndVv-vmaXoD8lfbPoqQo")
+    return gc.open_by_key("1LZsKVQDmauzADwlaHXeJy4nndVv-vmaXoD8lfbPoqQo")
+
+
+def add_to_sheet(sheet_name, row):
+    # TODO Function is deprecated due to get_document() and needs to be removed once dependents are updated.
+    doc = get_document()
     doc.worksheet(sheet_name).append_row(row)
+
+
+def get_sheet(sheet_name):
+    """Wrapper function to simplify calls for all sheet data"""
+    return get_document().worksheet(sheet_name).get_all_values()
 
 
 if __name__ == "__main__":
