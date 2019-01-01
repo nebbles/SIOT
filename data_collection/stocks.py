@@ -31,6 +31,8 @@ if __name__ == "__main__":
 
         # Get the current time on server
         cur_time = time.strftime('%Y-%m-%d %H:%M:%S')
+        print("="*80)
+        print("{}   Collecting data for stocks...\n".format(cur_time))
 
         # Get the current price for FTSE 100
         quote_data = get_quote(creds['alpha_vantage']['key'], "^FTSE")

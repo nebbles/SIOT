@@ -24,6 +24,8 @@ if __name__ == "__main__":
 
         # Get the current time on server
         cur_time = time.strftime('%Y-%m-%d %H:%M:%S')
+        print("="*80)
+        print("{}   Collecting data for stocks...\n".format(cur_time))
 
         dbde = ("51.497999", "-0.174511")  # Lat, Long Dyson Building
         london = ("51.506321", "-0.12714")  # Lat, Long for London
