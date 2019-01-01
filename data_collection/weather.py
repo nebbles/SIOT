@@ -10,8 +10,8 @@ import traceback
 
 
 def get_darksky_weather(key, location):
-    api_url = "https://api.darksky.net/forecast/{}/{loc[0]:},{loc[1]:}?exclude=minutely,hourly,daily&units=si".format(
-        key, loc=location)
+    api_url = "https://api.darksky.net/forecast/{apikey}/{loc[0]:},{loc[1]:}?exclude=minutely,hourly,daily&units=si".format(
+        apikey=key, loc=location)
 
     return utils.call_api(api_url)
 
@@ -24,8 +24,8 @@ if __name__ == "__main__":
 
         # Get the current time on server
         cur_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        print("="*80)
-        print("{}   Collecting data...\n".format(cur_time))
+        print("\n"+"="*80)
+        print("{}   Collecting data...".format(cur_time))
 
         dbde = ("51.497999", "-0.174511")  # Lat, Long Dyson Building
         london = ("51.506321", "-0.12714")  # Lat, Long for London
