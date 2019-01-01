@@ -25,7 +25,7 @@ if __name__ == "__main__":
         # Get the current time on server
         cur_time = time.strftime('%Y-%m-%d %H:%M:%S')
         print("="*80)
-        print("{}   Collecting data for stocks...\n".format(cur_time))
+        print("{}   Collecting data...\n".format(cur_time))
 
         dbde = ("51.497999", "-0.174511")  # Lat, Long Dyson Building
         london = ("51.506321", "-0.12714")  # Lat, Long for London
@@ -57,6 +57,8 @@ if __name__ == "__main__":
 
         # Append new row to end of correct tab in Google Sheet
         gsheet.add_to_sheet('API-WEATHER', row)
+
+        print("Done.")
 
     except:
         tb = traceback.format_exc()
