@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
         # Get the current time on server
         cur_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        print("\n"+"="*80)
+        print("="*80)
         print("{}   Collecting data...".format(cur_time))
 
         # Get the current price for FTSE 100
@@ -55,7 +55,8 @@ if __name__ == "__main__":
         # Append new row to end of correct tab in Google Sheet
         gsheet.add_to_sheet('API-STOCKS', row)
 
-        print("Done.")
+        print("{}   Done.".format(time.strftime('%Y-%m-%d %H:%M:%S')))
+
 
     except:
         tb = traceback.format_exc()
