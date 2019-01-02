@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 from requests import get, codes
+import os
+import sys
+import json
 
 
 class ANSI:
@@ -63,47 +66,54 @@ class ANSI:
         return cls.fg.bright_red + cls.bold + content + cls.reset
 
 
-HOST = "@"
-DOMAIN = "greenberg.io"
-# Dynamic DNS password (NOT account)
-PASSWORD = "PASSWORD"
+if __name__ == "__main__":
+    print("================ DDNS UPDATE ================")
 
-print("Checking IP address... ", end="", flush=True)
-ip_req = get(url='https://dynamicdns.park-your-domain.com/getip')
-IP = ip_req.text
-print(IP, flush=True)
+    # Collect credentials from external JSON file
+    with open(os.path.join(sys.path[0], "credentials.json")) as key_file:
+        creds = json.load(key_file)
 
-print("Checking previous IP address... ", end="")
-IP_CHANGED = True
-filename = "ip.txt"
-try:
-    with open(filename, "r+") as f:
-        prev_ip = f.read()
-        print(prev_ip)
+    HOST = "@"
+    DOMAIN = "greenberg.io"
+    PASSWORD = creds['ddns']  # Dynamic DNS password (NOT account)
 
-        if IP == prev_ip:
-            IP_CHANGED = False
+    print("Checking IP address... ", end="", flush=True)
+    ip_req = get(url='https://dynamicdns.park-your-domain.com/getip')
+    IP = ip_req.text
+    print(IP, flush=True)
 
-        f.seek(0)
-        f.truncate()
-        f.write(IP)
+    print("Checking previous IP address... ", end="")
+    IP_CHANGED = True
+    filename = "ip.txt"
+    try:
+        with open(filename, "r+") as f:
+            prev_ip = f.read()
+            print(prev_ip)
 
-except FileNotFoundError:
-    print("IP record file does not exist. Creating a new one.")
-    with open(filename, "w") as f:
-        f.write(IP)
+            if IP == prev_ip:
+                IP_CHANGED = False
 
-if IP_CHANGED:
-    print("IP address is new. Sending update to Namecheap DDNS.")
+            f.seek(0)
+            f.truncate()
+            f.write(IP)
 
-    ddns_url = "http://dynamicdns.park-your-domain.com/update?host={}&domain={}&password={}".format(
-        HOST, DOMAIN, PASSWORD)
-    update_req = get(ddns_url)
+    except FileNotFoundError:
+        print("IP record file does not exist. Creating a new one.")
+        with open(filename, "w") as f:
+            f.write(IP)
 
-    print("Update request status: {} ".format(update_req.status_code), end="")
-    if update_req.status_code == codes['ok']:
-        print(ANSI.OK("OK"))
+    if IP_CHANGED:
+        print("IP address is new. Sending update to Namecheap DDNS.")
+
+        ddns_url = "http://dynamicdns.park-your-domain.com/update?host={}&domain={}&password={}".format(
+            HOST, DOMAIN, PASSWORD)
+        update_req = get(ddns_url)
+
+        print("Update request status: {} ".format(
+            update_req.status_code), end="")
+        if update_req.status_code == codes.ok:
+            print(ANSI.OK("OK"))
+        else:
+            print(ANSI.ERROR("ERROR"))
     else:
-        print(ANSI.ERROR("ERROR"))
-else:
-    print("IP address does not appear to have changed. No update sent.")
+        print("IP address does not appear to have changed. No update sent.")
