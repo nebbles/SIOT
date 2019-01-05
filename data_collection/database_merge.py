@@ -6,6 +6,7 @@ import gsheet
 from datetime import datetime as dt
 from datetime import timedelta as td
 from ansi import ansi
+from pprint import pprint
 
 
 def get_csv_data(name):
@@ -30,6 +31,8 @@ def check_db(db, time_checks):
     time_index = 0  # starts checking against the first expected time
     db_index = 1  # Starts at 1 to skip header row
 
+    # pprint(db[4043:4048])
+
     while time_index < len(time_checks):
 
         try:
@@ -40,6 +43,11 @@ def check_db(db, time_checks):
             continue
 
         cur_min = dt.fromisoformat(cur_row[0]).replace(second=0)
+
+        # marker = time_checks[time_index]
+
+        # if marker.hour == 21 and marker.day == 1:
+        #     print(time_checks[time_index], db_index, cur_row)
 
         if time_checks[time_index] == cur_min:
             # ansi.printok("Success. CSV matches expected output for {} -> {}".format(TIME_MARK, cur_csv_row))
@@ -69,52 +77,72 @@ def main():
         time_mark += td(seconds=60*3)
 
     # Get databases
-    csv_data = get_csv_data("stocks.csv")
-    gs_data = gsheet.get_sheet('API-STOCKS')
+    stocks_csv_data = get_csv_data("stocks.csv")
+    stocks_gs_data = gsheet.get_sheet('API-STOCKS')
+
+    weather_csv_data = get_csv_data("weather.csv")
+    weather_gs_data = gsheet.get_sheet('API-WEATHER')
 
     # Check the databases against the expected scheduled times
-    csv_report = check_db(csv_data, expected_times)
-    gs_report = check_db(gs_data, expected_times)
+    stocks_csv_report = check_db(stocks_csv_data, expected_times)
+    stocks_gs_report = check_db(stocks_gs_data, expected_times)
+
+    weather_csv_report = check_db(weather_csv_data, expected_times)
+    weather_gs_report = check_db(weather_gs_data, expected_times)
 
     # Print the results out
-    print("              TIME              CSV         GSHEET ")
-    print("       ===================   ==========   ==========")
+    print("              TIME           ---------STOCKS--------   --------WEATHER--------")
+    print("              TIME              CSV         GSHEET        CSV         GSHEET  ")
+    print("       ===================   ==========   ==========   ==========   ==========")
 
     missing_count = 0
-    csv_missing = 0
-    gs_missing = 0
+    stocks_csv_missing = 0
+    stocks_gs_missing = 0
+    weather_csv_missing = 0
+    weather_gs_missing = 0
     for time in expected_times:
         status_width = 10
-        csv_status = ansi.ok("OK".ljust(status_width))
-        gs_status = ansi.ok("OK".ljust(status_width))
+        stocks_csv_status = ansi.ok("OK".ljust(status_width))
+        stocks_gs_status = ansi.ok("OK".ljust(status_width))
+        weather_csv_status = ansi.ok("OK".ljust(status_width))
+        weather_gs_status = ansi.ok("OK".ljust(status_width))
 
-        csv_is_missing = time in csv_report['missing']
-        gs_is_missing = time in gs_report['missing']
+        stocks_csv_is_missing = time in stocks_csv_report['missing']
+        stocks_gs_is_missing = time in stocks_gs_report['missing']
+        weather_csv_is_missing = time in weather_csv_report['missing']
+        weather_gs_is_missing = time in weather_gs_report['missing']
 
-        if csv_is_missing:
-            csv_status = ansi.error("MISSING".ljust(status_width))
-            csv_missing += 1
+        if stocks_csv_is_missing:
+            stocks_csv_status = ansi.error("MISSING".ljust(status_width))
+            stocks_csv_missing += 1
 
-        if gs_is_missing:
-            gs_status = ansi.error("MISSING".ljust(status_width))
-            gs_missing += 1
+        if stocks_gs_is_missing:
+            stocks_gs_status = ansi.error("MISSING".ljust(status_width))
+            stocks_gs_missing += 1
 
-        if csv_is_missing or gs_is_missing:
+        if weather_csv_is_missing:
+            weather_csv_status = ansi.error("MISSING".ljust(status_width))
+            weather_csv_missing += 1
+
+        if weather_gs_is_missing:
+            weather_gs_status = ansi.error("MISSING".ljust(status_width))
+            weather_gs_missing += 1
+
+        if stocks_csv_is_missing or stocks_gs_is_missing or weather_csv_is_missing or weather_gs_is_missing:
             missing_count += 1
-            print("{:4d}   {}   {}   {}".format(
-                missing_count, time, csv_status, gs_status))
+            print("{:4d}   {}   {}   {}   {}   {}".format(
+                missing_count, time, stocks_csv_status, stocks_gs_status, weather_csv_status, weather_gs_status))
 
-    print("       ===================   ==========   ==========\n")
-    pc_missing = len(csv_report['missing']) / len(expected_times) * 100
-    print("There are {} missing rows from CSV ({:2.0f}%)".format(
-        len(csv_report['missing']), pc_missing))
-    print("There are {} unexpected rows from CSV".format(
-        len(csv_report['unexpected'])))
+    print("       ===================   ==========   ==========   ==========   ==========\n")
+    print("STOCKS  CSV: {} missing rows".format(len(stocks_csv_report['missing'])))
+    print("             {} additional rows".format(len(stocks_csv_report['unexpected'])))
+    print("      SHEET: {} missing rows".format(len(stocks_gs_report['missing'])))
+    print("             {} additional rows".format(len(stocks_gs_report['unexpected'])))
     print("")
-    print("There are {} missing rows from GSheet".format(
-        len(gs_report['missing'])))
-    print("There are {} unexpected rows from GSheet".format(
-        len(gs_report['unexpected'])))
+    print("WEATHER CSV: {} missing rows".format(len(weather_csv_report['missing'])))
+    print("             {} additional rows".format(len(weather_csv_report['unexpected'])))
+    print("      SHEET: {} missing rows".format(len(weather_gs_report['missing'])))
+    print("             {} additional rows".format(len(weather_gs_report['unexpected'])))
 
 
 if __name__ == "__main__":
