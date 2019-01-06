@@ -109,9 +109,8 @@ if __name__ == "__main__":
             HOST, DOMAIN, PASSWORD)
         update_req = get(ddns_url)
 
-        print("Update request status: {} ".format(
-            update_req.status_code), end="")
-        if update_req.status_code == codes.ok:
+        print("Update request status: {} ".format(update_req.status_code), end="")
+        if update_req.status_code == codes['ok']:
             print(ANSI.OK("OK"))
         else:
             print(ANSI.ERROR("ERROR"))
