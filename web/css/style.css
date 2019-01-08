@@ -1,0 +1,18 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+#college {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 0.8em;
+    color: grey;
+    padding: 20pt 0 0 0;
+    font-size: 8pt;
+}
