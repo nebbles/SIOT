@@ -28,26 +28,51 @@
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
     <script src="js/Chart.min.js"></script> -->
 
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body>
     <div class="container">
-        <p id="college">Imperial College London<br>Dyson School of Design Engineering</p>
+        <p class="college">Imperial College London<br>Dyson School of Design Engineering</p>
         <h1>Sensing & IoT</h1>
-        <div>
-            <h2>Project Objectives</h2>
-            <p>Lorem ipsum</p>
+        <h2>Project Objectives</h2>
+        <div class="grid1">
+            <div class="brief">
+                <p>This project is a small data collection and visualisation challenge. Below you will see small data sets for localised weather for the Dyson Building in South Kensington (provided by <a href="https://darksky.net/dev">Dark Sky</a>) and Forex data (foreign exchange GBP/USD provided by <a href="https://www.alphavantage.co">Alpha Vantage</a>) collected over a few weeks. You can find the repository hosting this project <a href="https://github.com/nebbles/SIOT">on GitHub</a>.</p>
+                <!-- <div>
+                    <p>Note: This page will detect if it's raining where you are. You can toggle the animation here.</p>
+                    <div class="o-switch btn-group" data-toggle="buttons" role="group">
+                        <label class="btn btn-secondary active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> 1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option2" autocomplete="off"> 2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="options" id="option3" autocomplete="off"> 3
+                        </label>
+                    </div>
+                </div> -->
+            </div>
+            <div class="author-block">
+                <p id="author">Author</p>
+                <p id="name">Ben Greenberg</p>
+                <div id="author-links">
+                    <a href="https://www.linkedin.com/in/bsdgreenberg/" target="_blank" class="w-inline-block">
+                    <img src="images/linkedin.png" class="image"></a>
+                    <a href="http://www.bengreenberg.uk" target="_blank" class="portfolio-link">PORTFOLIO</a>
+                    <a href="https://github.com/nebbles" target="_blank" class="w-inline-block"><img src="images/GitHub-Mark-120px-plus.png" class="image github-img"></a>
+                </div>
+            </div>
         </div>
-
         <h2>Raw Data</h2>
-        <h3>Raw Temperature Data</h3>
         <div id="weather" style="width:100%; height:300px;"></div>
-        <div id="stocks" style="width:100%; height:300px;"></div>
+        <div id="forex" style="width:100%; height:300px;"></div>
 
-        <h3>Analysis</h3>
+
+        <h2>Analysis</h3>
         <!-- <div class="row m-t-5">
             <div class="col-6">
                 <h4>Weekly Trends</h4>

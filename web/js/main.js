@@ -13,26 +13,26 @@ function parseData(createGraph) {
     })
 }
 
-function reformatData(data) {
-    newdata = []
+function reformatData(data, time_label, data_label) {
+    var newdata = [];
     for (obj of data) {
-
-        var datum = Date.parse(obj['SCRIPT_TIME']);
-        newdata.push([
-            datum, 
-            obj['DS_TEMP']
-        ]);
+        let dto = obj[time_label];
+        if (dto != null) {
+            // parse the date into a list
+            let dtl = dto.split(/[^0-9]/);
+            // store the date as a new Date object
+            let date = new Date(dtl[0], dtl[1]-1, dtl[2], dtl[3], dtl[4], dtl[5])
+            // push desired data to a processed list  
+            newdata.push([
+                date.valueOf(), 
+                obj[data_label]
+            ]);
+        }
     }
     return newdata;
 }
 
-function createGraph(data) {
-    console.log(data);
-
-    var data = reformatData(data);
-
-    console.log(data)
-
+function tempGraph(data) {
     Highcharts.chart('weather', {
         chart: {
             zoomType: 'x'
@@ -88,6 +88,15 @@ function createGraph(data) {
             data: data
         }]
     });
+}
+
+function createGraph(data) {
+
+    var data = reformatData(data, 'SCRIPT_TIME', 'DS_TEMP');
+    tempGraph(data)
+
+
+    
 }
 
 parseData(createGraph);
