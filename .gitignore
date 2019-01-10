@@ -2,6 +2,7 @@
 */credentials.json
 */google_credentials.json
 .vscode
+data_collection/fig
 
 # Logs
 logs
