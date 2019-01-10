@@ -173,10 +173,6 @@ canvas {
 }
 
 
-
-
-
-
 /* Smaller than tablets should display the following properties */
 @media only screen and (max-width: 770px) {
     .grid1 {

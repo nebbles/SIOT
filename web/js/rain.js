@@ -49,12 +49,13 @@ function setup() {
     for (let i=0; i < 500; i++) {
         drops.push(new Drop());
     }
-    toggle = false; // TODO
 }
 
 function draw() {
+    toggle = document.getElementById('enableAni').checked; // TODO
+    console.log(toggle);
+    background(255);
     if (toggle) {
-        background(255);
         for (drop of drops) {
             drop.fall()
             drop.show()
