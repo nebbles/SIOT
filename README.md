@@ -1,26 +1,14 @@
-<p align="center" style="text-align: center;
-    font-weight: bolder;
-    font-size: 0.8em;
-    color: grey;
-    padding: 20pt 0 0 0;
-    font-size: 8pt;">
-	Imperial College London<br>Dyson School of Design Engineering
+<p align="center">
+	<sub>Imperial College London<br>Dyson School of Design Engineering</sub>
 </p>
 <h1 align="center">
 	  Sensing & IoT
 </h1>
 
 <h4 align="center">
-  <a href="http://nebbles.github.io/siot" style="margin-right: 13px;
-    margin-left: 15px;
-    padding: 0px 3px;
-    border: 2px solid #0077b5;
-    color: #0077b5;
-    font-size: 10pt;
-    line-height: 16px;
-    font-weight: 800;
-    text-decoration: none;
-    padding: 5pt;">View the Project Web Interface</a>
+  <a href="http://nebbles.github.io/siot">View the Project Web Interface</a>
+  <br><br>
+	<a href="https://github.com/nebbles/SIOT/blob/master/Report.pdf">Read the report</a>
   <br>
   <br>
 </h4>
@@ -32,14 +20,7 @@ The `data_collection/` directory contains all scripts and data backups used duri
 **Note**: the `Data_Analysis.ipynb` file contains all the Python data analytics for both basic and cross correlation.
 
 <p align="center">
-	<a href="https://github.com/nebbles/siot" target="_blank" style="padding: 0px 3px;
-    border: 2px solid black;
-    color: black;
-    font-size: 10px;
-    line-height: 16px;
-    font-weight: 800;
-    text-decoration: none;
-    padding: 5pt;">View the Jupyter Notebook</a>
+	<a href="https://github.com/nebbles/SIOT/blob/master/data_collection/Data_Analysis.ipynb" target="_blank">View the Jupyter Notebook</a>
 </p>
 
 
@@ -55,7 +36,7 @@ The `data_collection/` directory contains all scripts and data backups used duri
 > **weather.csv**         Raw data backup collected from Dark Sky  
 > **weather.py**          Data collection script for fetching from Dark Sky  
 
-**Note** the script files will not run without the API keys and credentials files. These have not been committed to GitHub.
+**Note**: the script files will not run without the API keys and credentials files. These have not been committed to GitHub.
 
 ## 2. Internet of Things (Interface)
 
