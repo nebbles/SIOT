@@ -12,16 +12,15 @@ The `data_collection/` directory contains all scripts and data backups used duri
 
 ### File descriptions
 
-| **Data_Analysis.ipynb** Analytics of collected data for basic and cross correlation
-| **database_merge.py**   Utility script for analysing any gaps in the data
-| **gsheet.py**           Module for interfacing with Google Sheets API
-| **requirements.txt**    Requirements file for Python libraries; install with `pip install -r requirements.txt`
-| **stocks.csv**          Raw data backup collected from Alpha Vantage
-| **stocks.py**           Data collection script for fetching from Alpha Vantage
-| **utils.py**            Utility module for extra script functions
-| **weather.csv**         Raw data backup collected from Dark Sky
-| **weather.py**          Data collection script for fetching from Dark Sky
-| 
+> **Data_Analysis.ipynb** Analytics of collected data for basic and cross correlation
+> **database_merge.py**   Utility script for analysing any gaps in the data
+> **gsheet.py**           Module for interfacing with Google Sheets API
+> **requirements.txt**    Requirements file for Python libraries; install with `pip install -r requirements.txt`
+> **stocks.csv**          Raw data backup collected from Alpha Vantage
+> **stocks.py**           Data collection script for fetching from Alpha Vantage
+> **utils.py**            Utility module for extra script functions
+> **weather.csv**         Raw data backup collected from Dark Sky
+> **weather.py**          Data collection script for fetching from Dark Sky
 
 **Note** the script files will not run without the API keys and credentials files. These have not been committed to GitHub.
 
