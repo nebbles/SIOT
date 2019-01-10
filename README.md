@@ -6,7 +6,7 @@
 </h1>
 
 <h4 align="center">
-  <a href="http://nebbles.github.io/siot">View the Project Web Interface</a>
+  <a href="http://nebbles.github.io/SIOT">View the Project Web Interface</a>
   <br><br>
 	<a href="https://github.com/nebbles/SIOT/blob/master/Report.pdf">Read the report</a>
   <br>
@@ -40,7 +40,7 @@ The `data_collection/` directory contains all scripts and data backups used duri
 
 ## 2. Internet of Things (Interface)
 
-The `docs/` directory contains all files related to the interface and data visualisation. To view the interface, you can see it at http://nebbles.github.io/siot where it is hosted by GitHub Pages.
+The `docs/` directory contains all files related to the interface and data visualisation. To view the interface, you can see it at http://nebbles.github.io/SIOT where it is hosted by GitHub Pages.
 
 Alternatively, you can view locally, which requires a local webserver. If you have Python installed this is a simple command. From the resository-level directory, run the following command:
 
