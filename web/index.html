@@ -21,6 +21,10 @@
     <script src="js/papaparse.min.js"></script>
 
     <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.dom.min.js"></script>
+
+    
 
     <!-- <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
     <script src="https://d3js.org/d3-fetch.v1.min.js"></script>
@@ -32,37 +36,38 @@
 </head>
 
 <body>
+    <div id="contenu"></div>
     <div class="container">
         <p class="college">Imperial College London<br>Dyson School of Design Engineering</p>
         <h1>Sensing & IoT</h1>
         <div class="grid1">
             <h2>Project Objectives</h2>
             <div class="brief">
-                <p>This project is a small data collection and visualisation challenge. Below you will see small data sets for localised weather for the Dyson Building in South Kensington (provided by <a href="https://darksky.net/dev">Dark Sky</a>) and Forex data (foreign exchange GBP/USD provided by <a href="https://www.alphavantage.co">Alpha Vantage</a>) collected over a few weeks. You can find the repository hosting this project <a href="https://github.com/nebbles/SIOT">on GitHub</a>.</p>
-                <!-- <div>
-                    <p>Note: This page will detect if it's raining where you are. You can toggle the animation here.</p>
-                    <div class="o-switch btn-group" data-toggle="buttons" role="group">
-                        <label class="btn btn-secondary active">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> 1
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option2" autocomplete="off"> 2
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="options" id="option3" autocomplete="off"> 3
-                        </label>
+                <p>This project is a small data collection and visualisation challenge. Below you will see small data sets
+                    for localised weather for the Dyson Building in South Kensington (provided by <a href="https://darksky.net/dev">Dark
+                        Sky</a>) and Forex data (foreign exchange GBP/USD provided by <a href="https://www.alphavantage.co">Alpha
+                        Vantage</a>) collected over a few weeks. You can find the repository hosting this project <a href="https://github.com/nebbles/SIOT">on
+                        GitHub</a>.</p>
+
+                <div style="text-align: center; margin-bottom: 10pt;">
+                    <div id="ani-control">
+                        <p id="geo"></p>
                     </div>
-                </div> -->
+                </div>
             </div>
+
             <div class="author-block">
                 <p id="author">Author</p>
                 <p id="name">Ben Greenberg</p>
                 <div id="author-links">
                     <a href="https://www.linkedin.com/in/bsdgreenberg/" target="_blank" class="w-inline-block">
-                    <img src="images/linkedin.png" class="image"></a>
+                        <img src="images/linkedin.png" class="image"></a>
                     <a href="http://www.bengreenberg.uk" target="_blank" class="portfolio-link">PORTFOLIO</a>
-                    <a href="https://github.com/nebbles" target="_blank" class="w-inline-block"><img src="images/GitHub-Mark-120px-plus.png" class="image github-img"></a>
+                    <a href="https://github.com/nebbles" target="_blank" class="w-inline-block"><img src="images/GitHub-Mark-120px-plus.png"
+                            class="image github-img"></a>
                 </div>
+                <a href="https://github.com/nebbles/siot" target="_blank" class="repo-link">Project on GitHub</a>
+
             </div>
         </div>
 
@@ -79,13 +84,15 @@
         <div id="trends" style="width:100%; height:300px;"></div>
 
         <h2>Data Correlation</h2>
+        <p id="chart-tip">Note: Values of 1 or -1 indicate strong correlation; 0 indicates no correlation.</p>
         <div id="correlation" style="width:100%; height:300px;"></div>
 
-        <p id="credit">Charts provided by <a href="https://www.highcharts.com?credits">Highcharts</a></p>
+        <p id="credit">Graphing library provided by <a href="https://www.highcharts.com?credits">Highcharts</a></p>
     </div>
 
     <!-- Custom javascript -->
     <script src="js/main.js"></script>
+    <script src="js/rain.js"></script>
 </body>
 
 </html>

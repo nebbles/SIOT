@@ -49,6 +49,16 @@ h2 {
     /* background-color: green; */
 }
 
+#ani-control {
+    background-color: rgba(255, 194, 80, 0.445);
+    padding: 5pt;
+}
+
+#ani-control p {
+    padding: 0;
+    margin: 0;
+}
+
 .author-block {
     text-align: center;
     /* color: green; */
@@ -73,6 +83,7 @@ h2 {
 
 #author-links {
     vertical-align: middle;
+    margin-bottom: 5pt;
 }
 
 #chart-tip {
@@ -122,6 +133,21 @@ h2 {
     color: #fff;
 }
 
+.repo-link {
+    padding: 0px 3px;
+    border: 2px solid black;
+    color: black;
+    font-size: 10px;
+    line-height: 16px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.repo-link:hover {
+    background-color: black;
+    color: #fff;
+}
+
 .image {
     width: 20px;
 }
@@ -131,13 +157,34 @@ h2 {
     display: inline-block;
 }
 
+
+
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#contenu {
+    position: relative;
+    z-index: 2;
+}
+
+
+
+
+
+
 /* Smaller than tablets should display the following properties */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 770px) {
     .grid1 {
         grid-template-columns: 100%;
     }
     .author-block {
         grid-column-start: 1;
+        margin-top: 10pt;
     }
 
     #temperature, #humidity, #pressure, #forex {
@@ -145,4 +192,3 @@ h2 {
         grid-column-end: 3;
     }
 }
-
