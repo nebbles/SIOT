@@ -1,13 +1,12 @@
-
 function parseData(path, createGraph) {
     Papa.parse(path, {
         download: true,
         header: true,
         dynamicTyping: true,
-        complete: function(results) {
+        complete: function (results) {
             createGraph(results.data)
         },
-        error: function(err) {
+        error: function (err) {
             console.log(err)
         }
     })
@@ -21,10 +20,10 @@ function reformatTimeData(data, time_label, data_label) {
             // parse the date into a list
             let dtl = dto.split(/[^0-9]/);
             // store the date as a new Date object
-            let date = new Date(dtl[0], dtl[1]-1, dtl[2], dtl[3], dtl[4], dtl[5])
+            let date = new Date(dtl[0], dtl[1] - 1, dtl[2], dtl[3], dtl[4], dtl[5])
             // push desired data to a processed list  
             newdata.push([
-                date.valueOf(), 
+                date.valueOf(),
                 obj[data_label]
             ]);
         }
@@ -69,7 +68,9 @@ function temperatureGraph(target, data) {
             enabled: false
         },
         plotOptions: {
-            series:{color:Highcharts.getOptions().colors[5]},
+            series: {
+                color: Highcharts.getOptions().colors[5]
+            },
             area: {
                 fillColor: {
                     linearGradient: {
@@ -333,23 +334,22 @@ function normTrendsGraph(data) {
         },
 
         series: [{
-                type: 'line',
-                name: 'Temperature',
-                data: temp
-            },{
-                type: 'line',
-                name: 'Humidity',
-                data: humi
-            },{
-                type: 'line',
-                name: 'Pressure',
-                data: pres
-            }, {
-                type: 'line',
-                name: 'GBP/USD',
-                data: forx
-            }
-        ]
+            type: 'line',
+            name: 'Temperature',
+            data: temp
+        }, {
+            type: 'line',
+            name: 'Humidity',
+            data: humi
+        }, {
+            type: 'line',
+            name: 'Pressure',
+            data: pres
+        }, {
+            type: 'line',
+            name: 'GBP/USD',
+            data: forx
+        }]
     });
 }
 
@@ -379,7 +379,7 @@ function correlationGraph(data) {
             gridLineWidth: 1,
             labels: {
                 formatter: function () {
-                    return this.value/6;
+                    return this.value / 6;
                 }
             }
         },
@@ -412,37 +412,15 @@ function correlationGraph(data) {
 }
 
 function createBasicGraphs(data) {
-
     var temp = reformatTimeData(data, 'TIME', 'TEMPERATURE');
     var humi = reformatTimeData(data, 'TIME', 'HUMIDITY');
     var pres = reformatTimeData(data, 'TIME', 'PRESSURE');
     var forx = reformatTimeData(data, 'TIME', 'FOREX');
-    
+
     temperatureGraph('temperature', temp)
     humidityGraph('humidity', humi)
     pressureGraph('pressure', pres)
     forexGraph('forex', forx)
-}
-
-function showPosition(position) {
-    lat = position.coords.latitude.toFixed(5);
-    lon = position.coords.longitude.toFixed(5);
-    x.innerHTML = "Location: " + lat + ", " + lon;
-    document.getElementById('ani-control').setAttribute("style", "background-color: #efefef;");
-}
-
-function getLocation() {
-    x = document.getElementById('geo')
-    if (navigator.geolocation) {
-        x.innerHTML = 'Trying to fetch your current location...'
-        loc = navigator.geolocation.getCurrentPosition(showPosition, function() {
-            x.innerHTML = "You've declined location sharing. This is needed for localised animations."
-            x.setAttribute("style", "text-align: left; font-size: 8pt;")
-            document.getElementById('ani-control').setAttribute("style", "background-color: transparent; padding: 0;");
-        });
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
 }
 
 document.getElementById('chart-tip').innerHTML = document.ontouchstart === undefined ?
@@ -451,5 +429,3 @@ document.getElementById('chart-tip').innerHTML = document.ontouchstart === undef
 parseData("./data/data_all.csv", createBasicGraphs);
 parseData("./data/data_trends_norm.csv", normTrendsGraph);
 parseData("./data/data_correlations.csv", correlationGraph);
-
-getLocation()

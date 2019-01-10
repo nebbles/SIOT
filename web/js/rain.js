@@ -12,6 +12,29 @@
 //     }
 //     request.send();
 // }
+function showPosition(position) {
+    lat = position.coords.latitude.toFixed(5);
+    lon = position.coords.longitude.toFixed(5);
+    x.innerHTML = "Location: " + lat + ", " + lon;
+    document.getElementById('ani-control').setAttribute("style", "background-color: #efefef;");
+    makeRequest([lat,lon]);
+}
+
+function getLocation() {
+    x = document.getElementById('geo')
+    if (navigator.geolocation) {
+        x.innerHTML = 'Trying to fetch your current location...'
+        loc = navigator.geolocation.getCurrentPosition(showPosition, function () {
+            x.innerHTML = "You've declined location sharing. This is needed for localised animations."
+            x.setAttribute("style", "text-align: left; font-size: 8pt;")
+            document.getElementById('ani-control').setAttribute("style", "background-color: transparent; padding: 0;");
+        });
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+getLocation()
 
 class Drop {
     constructor() {
@@ -53,7 +76,6 @@ function setup() {
 
 function draw() {
     toggle = document.getElementById('enableAni').checked; // TODO
-    console.log(toggle);
     background(255);
     if (toggle) {
         for (drop of drops) {
