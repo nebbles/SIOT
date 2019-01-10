@@ -7,8 +7,6 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
@@ -37,8 +35,8 @@
     <div class="container">
         <p class="college">Imperial College London<br>Dyson School of Design Engineering</p>
         <h1>Sensing & IoT</h1>
-        <h2>Project Objectives</h2>
         <div class="grid1">
+            <h2>Project Objectives</h2>
             <div class="brief">
                 <p>This project is a small data collection and visualisation challenge. Below you will see small data sets for localised weather for the Dyson Building in South Kensington (provided by <a href="https://darksky.net/dev">Dark Sky</a>) and Forex data (foreign exchange GBP/USD provided by <a href="https://www.alphavantage.co">Alpha Vantage</a>) collected over a few weeks. You can find the repository hosting this project <a href="https://github.com/nebbles/SIOT">on GitHub</a>.</p>
                 <!-- <div>
@@ -67,25 +65,24 @@
                 </div>
             </div>
         </div>
-        <h2>Raw Data</h2>
-        <div id="weather" style="width:100%; height:300px;"></div>
-        <div id="forex" style="width:100%; height:300px;"></div>
 
+        <h2>Original Data</h2>
+        <p id="chart-tip"></p>
+        <div class="grid2">
+            <div id="temperature" style="width:100%; height:300px;"></div>
+            <div id="humidity" style="width:100%; height:300px;"></div>
+            <div id="pressure" style="width:100%; height:300px;"></div>
+            <div id="forex" style="width:100%; height:300px;"></div>
+        </div>
 
-        <h2>Analysis</h3>
-        <!-- <div class="row m-t-5">
-            <div class="col-6">
-                <h4>Weekly Trends</h4>
-                <canvas id="weeklyTrends" width="600" height="400"></canvas>
-            </div>
-            <div class="col-6">
-                <h4>Daily Trends</h4>
-                <canvas id="dailyTrends" width="600" height="400"></canvas>
-            </div>
-        </div> -->
+        <h2>Data Trends</h2>
+        <div id="trends" style="width:100%; height:300px;"></div>
 
+        <h2>Data Correlation</h2>
+        <div id="correlation" style="width:100%; height:300px;"></div>
+
+        <p id="credit">Charts provided by <a href="https://www.highcharts.com?credits">Highcharts</a></p>
     </div>
-
 
     <!-- Custom javascript -->
     <script src="js/main.js"></script>

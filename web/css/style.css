@@ -13,11 +13,20 @@ h2 {
     font-size: 14pt;
     font-weight: 900;
     color: rgb(80, 80, 80);
+    margin: 10pt 0;
 }
 
 .grid1 {
     display: grid;
     grid-template-columns: 70% auto;
+    /* justify-items: stretch;
+    align-items: stretch;
+    justify-content: stretch; */
+}
+
+.grid2 {
+    display: grid;
+    grid-template-columns: 50% auto;
     justify-items: stretch;
     align-items: stretch;
     justify-content: stretch;
@@ -66,6 +75,36 @@ h2 {
     vertical-align: middle;
 }
 
+#chart-tip {
+    font-size: 8pt;
+    font-weight: 700;
+    color: #616161;
+}
+
+#temperature {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+#humidity {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+#pressure {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+#forex {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+#credit {
+    font-size: 8pt;
+    text-align: center;
+    margin: 10pt 0;
+}
+
 .portfolio-link {
     margin-right: 13px;
     margin-left: 15px;
@@ -100,4 +139,10 @@ h2 {
     .author-block {
         grid-column-start: 1;
     }
+
+    #temperature, #humidity, #pressure, #forex {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
 }
+
