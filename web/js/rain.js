@@ -1,32 +1,9 @@
-// function makeRequest() {
-//     url = "https://api.darksky.net/forecast/{apikey}/{loc[0]:},{loc[1]:}?exclude=minutely,hourly,daily&units=si"
-//     var request = new XMLHttpRequest();
-//     request.open('GET', url, true);
-//     request.onload = function () {
-//         var data = JSON.parse(this.response);
-//         if (request.status >= 200 && request.status < 400) {
-//             console.log(data)
-//         } else {
-//             console.log('There was an error with the API request.');
-//         }
-//     }
-//     request.send();
-// }
-function showPosition(position) {
-    lat = position.coords.latitude.toFixed(5);
-    lon = position.coords.longitude.toFixed(5);
-    x.innerHTML = "Location: " + lat + ", " + lon;
-    document.getElementById('ani-control').setAttribute("style", "background-color: #efefef;");
-    makeRequest([lat,lon]);
-}
-
 function getLocation() {
     x = document.getElementById('geo')
     if (navigator.geolocation) {
         x.innerHTML = 'Trying to fetch your current location...'
         loc = navigator.geolocation.getCurrentPosition(showPosition, function () {
             x.innerHTML = "You've declined location sharing. This is needed for localised animations."
-            x.setAttribute("style", "text-align: left; font-size: 8pt;")
             document.getElementById('ani-control').setAttribute("style", "background-color: transparent; padding: 0;");
         });
     } else {
@@ -34,7 +11,32 @@ function getLocation() {
     }
 }
 
-getLocation()
+function showPosition(position) {
+    lat = position.coords.latitude.toFixed(5);
+    lon = position.coords.longitude.toFixed(5);
+    x.innerHTML = "Location: " + lat + ", " + lon;
+    // document.getElementById('ani-control').setAttribute("style", "background-color: #efefef;");
+    document.getElementById('ani-control').setAttribute("style", "background-color: transparent; padding: 0;");
+    url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=3715b8bf474b3d5f1f556a20573c7619`
+    // console.log(url)
+    loadJSON(url, cb);
+}
+
+function cb(data) {
+    console.log(data);
+    x.innerHTML = "Location: " + lat + ", " + lon + "; current status: " + data.weather[0].main;
+    let groupNum = Math.floor(data.weather[0].id / 100);
+    // console.log('Group num calculated as ', groupNum);
+    // groupNum = 3; // for DEBUGGING
+    let groups = [2, 3, 5]
+    if (groups.includes(groupNum)) {
+        toggle = document.getElementById('enableAni').checked = true;
+    }
+}
+
+function preload() {
+    getLocation()
+}
 
 class Drop {
     constructor() {
@@ -57,7 +59,7 @@ class Drop {
 
     show() {
         stroke(138, 43, 226, 50);
-        line(this.x, this.y, this.x, this.y+10)
+        line(this.x, this.y, this.x, this.y + 10)
     }
 }
 
@@ -69,7 +71,7 @@ function setup() {
     canvas.style('z-index', '-1');
 
     drops = [];
-    for (let i=0; i < 500; i++) {
+    for (let i = 0; i < 500; i++) {
         drops.push(new Drop());
     }
 }
@@ -88,4 +90,3 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-

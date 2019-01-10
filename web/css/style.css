@@ -158,7 +158,10 @@ h2 {
 }
 
 
-
+#geo {
+    text-align: left;
+    font-size: 8pt;
+}
 
 canvas {
     position: fixed;
