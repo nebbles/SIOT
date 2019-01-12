@@ -163,12 +163,12 @@ h2 {
     font-size: 8pt;
 }
 
-canvas {
+/* canvas {
     position: fixed;
     top: 0;
     left: 0;
     z-index: -1;
-}
+} */
 
 /* Smaller than tablets should display the following properties */
 @media only screen and (max-width: 770px) {

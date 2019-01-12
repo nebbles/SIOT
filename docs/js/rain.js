@@ -71,6 +71,11 @@ var toggle;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
+    // canvas.style('position', 'fixed'); // broken - see https://github.com/processing/p5.js/issues/3447
+    canvas.elt.style.position = 'fixed';
+    canvas.style('top', '0');
+    canvas.style('left', '0');
+    canvas.style('z-index', '-1');
 
     drops = [];
     for (let i = 0; i < 500; i++) {
