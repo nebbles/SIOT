@@ -24,7 +24,7 @@ function showPosition(position) {
 
 function cb(data) {
     console.log(data);
-    x.innerHTML = "Location: " + lat + ", " + lon + "; current status: " + data.weather[0].main;
+    x.innerHTML = "Location: " + lat + ", " + lon + "; current forecast status: " + data.weather[0].main;
     let groupNum = Math.floor(data.weather[0].id / 100);
     // console.log('Group num calculated as ', groupNum);
     // groupNum = 3; // for DEBUGGING
@@ -40,20 +40,23 @@ function preload() {
 
 class Drop {
     constructor() {
-        this.x = random(width);
-        this.y = random(-height, 0);
-        this.z = random(0, 20);
-        this.len = map(this.z, 0, 20, 10, 20);
-        this.yspeed = map(this.z, 0, 20, 4, 10);
+        this.initPosition = function() {
+            this.x = random(width);
+            this.y = random(-height, 0);
+            this.z = random(0, 20);
+            this.len = map(this.z, 0, 20, 10, 20);
+            this.yspeed = map(this.z, 0, 20, 4, 10);
+        }
+        this.initPosition();
     }
 
     fall() {
         this.y = this.y + this.yspeed;
         this.yspeed = this.yspeed + 0.05;
+        this.yspeed = map(this.z, 0, 20, 4, 10);
 
         if (this.y > height) {
-            this.y = random(-200, -100);
-            this.yspeed = map(this.z, 0, 20, 4, 10);
+            this.initPosition();
         }
     }
 
@@ -68,7 +71,6 @@ var toggle;
 
 function setup() {
     canvas = createCanvas(windowWidth, windowHeight);
-    canvas.style('z-index', '-1');
 
     drops = [];
     for (let i = 0; i < 500; i++) {

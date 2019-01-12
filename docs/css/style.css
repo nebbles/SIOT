@@ -167,14 +167,8 @@ canvas {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
 }
-
-#contenu {
-    position: relative;
-    z-index: 2;
-}
-
 
 /* Smaller than tablets should display the following properties */
 @media only screen and (max-width: 770px) {
